@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class MapSort {
+    public static void main(String[] args) throws IOException {
+
+       // System.out.println("Test MapSort");
+        Map<String, Integer> map = new HashMap<>();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true){
+            String s = reader.readLine();
+            if(s.isEmpty()){
+                break;
+            }
+            int c = Integer.parseInt(s);
+            String name = reader.readLine();
+            map.put(name,c);
+        }
+        sort(map);
+    }
+    public static void sort(Map m){
+          Map<String, Integer> map = m;
+        LinkedHashMap<String,Integer> sortedMap = new LinkedHashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for(Map.Entry<String, Integer> pair: map.entrySet()){
+        list.add(pair.getValue());
+       }
+        Collections.sort(list);
+        Collections.reverse(list);
+        for(Integer number:list){
+           for(Map.Entry<String,Integer> entry: map.entrySet()){
+               if(entry.getValue().equals(number)){
+                   sortedMap.put(entry.getKey(), number);
+               }
+           }
+        }
+        for(Map.Entry<String,Integer> pair:sortedMap.entrySet()){
+            System.out.println(pair.getKey()+" "+ pair.getValue());
+        }
+    }
+}
